@@ -33,16 +33,16 @@ class GameController extends Controller
 
         if (empty($applicants)) {
             $applicants = GameApplicant::query()
-                ->where('game_id', $gift->game_id)
                 ->get();
         }
 
-        $winner = $applicants->random();
+        if ($applicants->count() > 0) {
+            $winner = $applicants->random();
 
-        $gift->update([
-            'application_id' => $winner->id
-        ]);
-
+            $gift->update([
+                'application_id' => $winner->id
+            ]);
+        }
 
         return redirect()->route('gifts.index');
     }
