@@ -31,7 +31,8 @@ class GameController extends Controller
             ->where('created_at', '<=', $gift->ended_at)
             ->get();
 
-        if (empty($applicants)) {
+
+        if ($applicants->count() == 0) {
             $applicants = GameApplicant::query()
                 ->get();
         }
