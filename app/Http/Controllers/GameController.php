@@ -15,6 +15,7 @@ class GameController extends Controller
     {
         $gifts = Gift::query()
             ->where('game_id', 1)
+            ->orderBy('started_at')
             ->get();
 
         return Inertia::render('Game/Index', ['gifts' => GiftResource::collection($gifts) ]);
